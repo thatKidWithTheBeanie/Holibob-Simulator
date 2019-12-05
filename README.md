@@ -1,2 +1,2 @@
 # Holibob-Simulator
-Book hotels and flights from places to places, HND coursework.
+Book hotels and one way flights from places to places, HND coursework.
