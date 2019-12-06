@@ -3,7 +3,7 @@
 ### NTS: planes go two ways
 '''
   ___               _     _                                                       
- | _ )  ___   ___  | |_  | |_  '  ___    ___   _ _    ___    __ __ __  __ _   _  _ 
+ | _ )  ___   ___  | |_  | |_  ' ___    ___   _ _    ___    __ __ __  __ _   _  _ 
  | _ \ / _ \ / _ \ |  _| | ' \  (_-<   / _ \ | ' \  / -_)   \ V  V / / _` | | || |
  |___/ \___/ \___/ _\__| |_||_| /__/   \___/ |_||_| \___|    \_/\_/  \__,_|  \_, |
  | |_    ___  | | (_)  __| |  __ _   _  _   ___ | |                          |__/ 
@@ -20,10 +20,9 @@ def gap():
     
 hotels = []
 class Hotel():
-    def __init__(self, hotelName, city, unitsAvai):
+    def __init__(self, hotelName, city):
         self.hotelName = hotelName
         self.city = city
-        self.unitsAvai = unitsAvai
         hotels.append([hotelName, city])
 
 flights = []
@@ -35,37 +34,60 @@ class Flight():
         self.dayOfWeek = dayOfWeek
         self.leaveTime = leaveTime
         flights.append([flightCode, fromCity, toCity, dayOfWeek, leaveTime])
+
+    def getFlightInfo():
+        print ("Flight ", flightCode, " details:")
+        print ("Departing ", fromCity)
+        print ("Arriving at ", toCity)
+        print ("On ", dayOfWeek, " at ", leavetime)
         
 bookings = []
 class Booking():
-    def __init__(self, bookingCode, username, flightCode, hotelName, authNum=None):
+    def __init__(self, bookingCode, username, flightCode, hotelName, authNum):
         self.bookingCode = bookingCode
         self.username = username
         self.hotelName = hotelName
         self.flightCode = flightCode
-        ### Random int selected for when user makes/cancels bookings
-        ### Not proper practice but i cba to do it and no one will be cracking this
-        self.authNum = random.randint(100,1000)
-        flights.append([bookingCode, username, flightCode, hotelName, authNum])
+        self.authNum = authNum
+        bookings.append([bookingCode, username, flightCode, hotelName, authNum])
+
+    def getBookingInfo(self):
+        print ("Your booking info")
+        print ("booking code", self.bookingCode)
+        print ("name ", self.username)
+        print ("Flight ", self.flightCode)
+        print ("Hotel name ", self.hotelName)
+        print ("auth number ", self.authNum)
+        gap()        
+
 
 ### Static variables
 ### Hotel name, city, available rooms
 ### TD: Maybe add website link for each hotel?
-Hilton = Hotel("Hilton", "london", 900)
-BurjAl = Hotel("Burj Al Arab", "dubai", 900)
-Plaza = Hotel("Plaza Hotel", "new york", 500)
-MarinaBay = Hotel("Marina Bay Sands", "singapore", 200)
-TravelLodge = Hotel("Lisbon Travel Lodge", "lisbon", 50)
+Hilton = Hotel("Hilton", "london")
+BurjAl = Hotel("Burj Al Arab", "dubai")
+Plaza = Hotel("Plaza Hotel", "new york")
+MarinaBay = Hotel("Marina Bay Sands", "singapore")
+TravelLodge = Hotel("Lisbon Travel Lodge", "lisbon")
 
 ### Flight name, from, to, day of week (1-7), time (00.00 - 24.00) 
-MH5230 = Flight("MH5230", "london", "lisbon", 1, 05.00)
-MH5231 = Flight("MH5231", "lisbon", "london", 6, 20.00)
-MH5232 = Flight("MH5232", "london", "paris", 4, 07.30)
+MH5230 = Flight("MH5230", "london", "lisbon", "Monday", 05.00)
+MH5231 = Flight("MH5231", "lisbon", "london", "Sunday", 20.00)
+MH5232 = Flight("MH5232", "london", "paris", "Thursday", 07.30)
 
 
 ### Test Booking
-giovanni1234 = Booking("giovanniMH5231", "giovanni", "MH5231", "Lisbon Travel Lodge")
+giovanni1234 = Booking("giovanniMH5231", "giovanni", "MH5231", "Lisbon Travel Lodge", 420)
+###    _        _           _        
+###   /_\    __| |  _ __   (_)  _ _  
+###  / _ \  / _` | | '  \  | | | ' \ 
+### /_/ \_\ \__,_| |_|_|_| |_| |_||_|
 
+adminCode = "6969"                                  
+
+def ListAllBookings():
+    for i in range(len(bookings)):
+        print (bookings[i])
 
 ###  ___               _   
 ### | _ )  ___   ___  | |__
@@ -125,22 +147,17 @@ def bookAtrip():
                 x = 3
     print ("Please enter your first name")
     usrName = input("")
+    print ("Please rate your happiness from 100 - 9999")
+    usrNum = input("")
     print ("Booking the flight ", chsnFlight)
     print ("Booking the hotel ", chsnHotel)
+    ### TD: Think of a new naming scheme that wont mix with the loops
     bookingCodeP = usrName + chsnFlight
-    test = bookingCodeP
-    test = Booking(bookingCodeP, usrName, chsnFlight, chsnHotel)
+    bookingCodeP = Booking(bookingCodeP, usrName, chsnFlight, chsnHotel, usrNum)
     gap()
-    print ("booking code", test.bookingCode)
-    print ("name ", test.username)
-    print ("Flight ", test.flightCode)
-    print ("Hotel name ", test.hotelName)
-    print ("auth number ", test.authNum)
+    print ("Your booking code is ", usrNum, " do not forget it as it cannot be changed")
+    gap()
     
-    
-    
-
-
 
 ###  __  __          _        
 ### |  \/  |  __ _  (_)  _ _  
@@ -149,3 +166,4 @@ def bookAtrip():
                           
 designAtrip()
 bookAtrip()
+
