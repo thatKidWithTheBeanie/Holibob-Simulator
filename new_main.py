@@ -1,8 +1,3 @@
-### NTS: only input in lower case
-### TD: .lower()
-### NTS: planes go two ways
-
-### Design patterns used: Facade, Order of importance
 '''
   ___               _     _                                                       
  | _ )  ___   ___  | |_  | |_  ' ___    ___   _ _    ___    __ __ __  __ _   _  _ 
@@ -12,8 +7,23 @@
  | ' \  / _ \ | | | | / _` | / _` | | || | (_-< |_|                               
  |_||_| \___/ |_| |_| \__,_| \__,_|  \_, | /__/ (_)                               
                                      |__/                                         
-
 '''
+
+def welcome():
+    print ("  ___           _   _    _                   ")
+    print (" | _ ) ___  ___| |_| |_ ( )___  ___ _ _  ___  ")
+    print (" | _ \/ _ \/ _ \  _| ' \|/(_-< / _ \ ' \/ -_) ")
+    print (" |___/\___/\___/\__|_||_| /__/ \___/_||_\___| ")
+    print ("                     __ _ _      _   _      _ ")
+    print ("__ __ ____ _ _  _   / _| (_)__ _| |_| |_ __| |")
+    print ("\ V  V / _` | || | |  _| | / _` | ' \  _(_-<_|")
+    print (" \_/\_/\__,_|\_, | |_| |_|_\__, |_||_\__/__(_)")
+    print ("              |__/          |___/              ")                                        
+    print ("Hello and welcome to Booth's one way flights!")
+    gap()
+    print ("If you are looking to escape an extistenial crisis, this is the place")
+    print ("We can book your flight and expensive hotel with ease, just follow the prompts")
+
 import random
 
 def gap():
@@ -62,7 +72,6 @@ class Booking():
         print ("auth number ", self.authNum)
         gap()        
 
-
 ### Static variables
 ### Hotel name, city, available rooms
 ### TD: Maybe add website link for each hotel?
@@ -77,7 +86,6 @@ MH5230 = Flight("MH5230", "london", "lisbon", "Monday", 05.00)
 MH5231 = Flight("MH5231", "lisbon", "london", "Sunday", 20.00)
 MH5232 = Flight("MH5232", "london", "paris", "Thursday", 07.30)
 
-
 ### Test Booking
 giovanni1234 = Booking("giovanniMH5231", "giovanni", "MH5231", "Lisbon Travel Lodge", 420)
 
@@ -91,7 +99,7 @@ adminCode = "6969"
 def ListAllBookings():
     for i in range(len(bookings)):
         print (bookings[i])
-
+        
 ###  ___               _   
 ### | _ )  ___   ___  | |__
 ### | _ \ / _ \ / _ \ | / /
@@ -163,12 +171,46 @@ def bookAtrip():
     gap()
     print ("Your booking code is ", bookingCodeP.bookingCode, " do not forget it as it cannot be changed")
     gap()
+    menu()
 
+def viewBooking():
+    bookatt = input ("What is your booking number?")
+    for i in range(len(bookings)):
+        if bookatt in bookings[i][0]:
+            print ("Your flight code is", bookings[i][2])
+            print ("Your hotel is", bookings[i][3])
+    
+###  __  __              
+### |  \/  |___ _ _ _  _ 
+### | |\/| / -_) ' \ || |
+### |_|  |_\___|_||_\_,_|
+def menu():
+    while True:
+        gap()
+        print ("Menu: ")
+        print ("1. Design a trip")
+        print ("2. Book a trip")
+        print ("3. View your booking")
+        print ("4. View all bookings [ADMIN]")
+        gap()
+        print ("Please enter a number 1 - 4")
+        menuChoice = input ("")
+        if menuChoice == "1":
+            designAtrip()
+        if menuChoice == "2":
+            bookAtrip()
+        if menuChoice == "3":
+            viewBooking()
+        if menuChoice == "4":
+            attempt = input ("Please enter the admin code")
+            if attempt == adminCode:
+                ListAllBookings()
+            else:
+                print ("Incorrect password")
+                
 ###  __  __          _        
 ### |  \/  |  __ _  (_)  _ _  
 ### | |\/| | / _` | | | | ' \ 
 ### |_|  |_| \__,_| |_| |_||_|
-                          
-designAtrip()
-bookAtrip()
-ListAllBookings()
+welcome()
+menu()                          
