@@ -80,11 +80,22 @@ BurjAl = Hotel("Burj Al Arab", "dubai")
 Plaza = Hotel("Plaza Hotel", "new york")
 MarinaBay = Hotel("Marina Bay Sands", "singapore")
 TravelLodge = Hotel("Lisbon Travel Lodge", "lisbon")
+Niklavs = Hotel("Niklavs", "riga")
+Merde = Hotel("Merde", "paris")
+
 
 ### Flight name, from, to, day of week (1-7), time (00.00 - 24.00) 
 MH5230 = Flight("MH5230", "london", "lisbon", "Monday", 05.00)
 MH5231 = Flight("MH5231", "lisbon", "london", "Sunday", 20.00)
 MH5232 = Flight("MH5232", "london", "paris", "Thursday", 07.30)
+MH5234 = Flight("MH5234", "riga", "paris", "Wednesday", 10.30)
+MH5243 = Flight("MH5243", "paris", "riga", "Monday", 11.30)
+MH5264 = Flight("MH5264", "london", "paris", "Thursday", 07.30)
+MH3954 = Flight("MH3954", "osaka", "natal", "Sunday", 13.32)
+MH2343 = Flight("MH2343", "natal", "osaka", "Monday", 16.40)
+
+
+
 
 ### Test Booking
 giovanni1234 = Booking("giovanniMH5231", "giovanni", "MH5231", "Lisbon Travel Lodge", 420)
@@ -167,8 +178,6 @@ def bookAtrip():
     ### When searching in future, use bookingCode not var name - conflicts with bcodep
     ### New instance is placed in the list even after bcodep is overwritten
     bookingCodeP = Booking(bookingCodeP, usrName, chsnFlight, chsnHotel, usrNum)
-    print (bookingCodeP.bookingCode)
-    gap()
     print ("Your booking code is ", bookingCodeP.bookingCode, " do not forget it as it cannot be changed")
     gap()
     menu()
@@ -214,3 +223,6 @@ def menu():
 ### |_|  |_| \__,_| |_| |_||_|
 welcome()
 menu()                          
+designAtrip()
+bookAtrip()
+ListAllBookings()
